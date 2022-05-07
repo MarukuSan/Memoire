@@ -102,27 +102,16 @@ void liberationMemoire (memoire mem, bloc blocALiberer) {
   }
 }
 
-int main() {
-  memoire a = creerMemoire(2, 264);
-  afficherListe(a.listBlocs);
-  printf("%d\n", nbreMotLibre(a));
+int main(int argc, char *argv[]) {
+  int n;
+  if (argc == 1) {
+    n = 0;
+  }
+  else {
+    n = atoi(argv[1]);
+  }
 
-  allocationMemoire(a, 4);
-  afficherListe(a.listBlocs);
-  printf("%d\n", nbreMotLibre(a));
-
-  allocationMemoire(a, 32);
-  afficherListe(a.listBlocs);
-  printf("%d\n", nbreMotLibre(a));
-
-  allocationMemoire(a, 12);
-  afficherListe(a.listBlocs);
-  printf("%d\n", nbreMotLibre(a));
-
-  bloc b = {36, 12, Libre};
-  liberationMemoire(a, b);
-  afficherListe(a.listBlocs);
-  printf("%d\n", nbreMotLibre(a));
-
+  memoire m = creerMemoire((int)sizeof(int), 4*n);
+  afficherListe(m.listBlocs);
   return 0;
 }
