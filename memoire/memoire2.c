@@ -74,20 +74,32 @@ bloc allocationMemoire (memoire mem, int tailleAAllouer) {
 
 void liberationMemoire (memoire mem, bloc blocALiberer) {
   Element* courant = mem.listBlocs->premier;
-  int i = 0;
   while (courant != NULL) {
     if (courant->data.debut == blocALiberer.debut && courant->data.taille == blocALiberer.taille) {
       courant->data.drapeau = Libre;
-      /* Fusionne avec le bloc suivant s'il est libre */
-      if (courant->suivant->data.drapeau == Libre) {
+    }
+    courant = courant->suivant;
+  }
+
+  /* Fusionne avec les bloc libres qui se suivent */
+  courant = mem.listBlocs->premier;
+  int i = 0;
+  while (courant != NULL) {
+    if (courant->suivant != NULL) {
+      if (courant->suivant->data.drapeau == Libre && courant->data.drapeau == Libre) {
         courant->data.taille = courant->data.taille + courant->suivant->data.taille;
         suppression2(mem.listBlocs, i+1);
       }
+      else {
+        courant = courant->suivant;
+        i++;
+      }
     }
-    
-    i++;
-    courant = courant->suivant;
-  }  
+    else {
+      courant = courant->suivant;
+      i++;
+    }
+  }
 }
 
 int main() {
