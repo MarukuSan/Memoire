@@ -39,7 +39,7 @@ int duree_vol(int a) {
     int duree = 0;
     while (a != 1) {
         if (syracuse[a-1] != -1 && a-1<SIZE) {
-            printf("J'ai utilise d(%d) pour %d a l'etape %d\n", a, nbre, duree);
+            printf("J'ai utilise le duree de vol de %d pour %d a l'etape %d\n", a, nbre, duree);
             return duree + syracuse[a-1];
         }
         else if (a%2 == 0) {
@@ -148,7 +148,7 @@ int main()
     }
 
     /* Affiche les valeurs stockées dans syracuse */
-    for (int i=0; i<100; i++) {
+    for (int i=0; i<SIZE; i++) {
         printf("%d : %d\n", i+1, syracuse[i]);
     }
 
